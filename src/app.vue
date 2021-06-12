@@ -1,60 +1,108 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+  <v-app light>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+    <v-app-bar fixed app light clipped-left color=#666785 class="elevation-2">
+      <v-app-bar-nav-icon @click="toggleDrawer" class="white--text"></v-app-bar-nav-icon>
+      <v-toolbar-title class="white--text">Help-I</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <h1 id="GameChooseTittle" class="text-center">Elige tu juego</h1>
+      <v-container fluid>
+        <GameContent :articles="articles"></GameContent>
+      </v-container>
     </v-main>
+
+    <v-footer
+        dark
+        padless
+
+    >
+      <v-card
+          flat
+          tile
+          class="flex"
+      >
+        <v-card-text class="text-xl-center">
+          <v-btn
+              v-for="icon in icons"
+              :key="icon"
+              class="mx-4 white--text"
+              icon
+          >
+            <v-icon size="24px">
+              {{ icon }}
+            </v-icon>
+          </v-btn>
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-text class="white--text text-xl-center">
+          {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+        </v-card-text>
+      </v-card>
+    </v-footer>
+
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import GamesApiService from "@/services/games-api.service";
+import GameContent from "@/components/game-content";
 
 export default {
   name: 'App',
-
   components: {
-    HelloWorld,
+    GameContent
   },
 
-  data: () => ({
-    //
-  }),
+
+  data () {
+    return {
+      drawer: false,
+      articles: [],
+      errors: [],
+      gamesApi: GamesApiService,
+      icons: [
+        'mdi-facebook',
+        'mdi-twitter',
+        'mdi-linkedin',
+        'mdi-instagram',
+      ],
+    }
+  },
+  created() {
+    this.getGamesFor('techcrunch');
+  },
+  methods: {
+    toggleDrawer() {
+      this.drawer = !this.drawer
+    },
+    getGamesFor(genreId) {
+      this.gamesApi.getGamesFor(genreId)
+          .then(response => {
+            this.articles = response.data.articles;
+            console.log(`games: ${this.articles}`);
+          })
+          .catch(e => {
+            this.errors.push(e);
+          })
+    },
+
+  }
 };
 </script>
+
+<style scoped>
+#GameChooseTittle {
+  font-family: "Roboto";
+  font-size: 6rem;
+  font-weight: 700;
+  color: #139028;
+  margin: 80mm;
+  text-align-all: center;
+
+}
+
+</style>
