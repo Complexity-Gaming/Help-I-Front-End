@@ -21,7 +21,7 @@ const routes = [
     component: () => import('../components/games')
   },
   {
-    path: '/games/menu',
+    path: '/games/:id',
     name: 'game-menu',
     component: () => import('../components/game-menu')
   }

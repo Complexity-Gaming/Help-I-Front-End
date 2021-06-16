@@ -3,29 +3,11 @@
   <section>
     <h1 class="gameChooseTittle">Elige tu juego</h1>
     <v-row align="center" justify="center">
-      <v-col cols="6" sm="3">
+      <v-col cols="6" sm="3" v-for="game in games" :key="game.id">
         <div>
-          <v-img @click="navigateToGameMenu" class="gameImage" src="//images.igdb.com/igdb/image/upload/t_1080p/co1vce.jpg"></v-img>
+          <v-img @click="navigateToGameMenu(game.id)" class="gameImage" v-bind:src="game.coverUrl"></v-img>
         </div>
-        <h2 class="gameTitle">Counter Strike</h2>
-      </v-col>
-      <v-col cols="6" sm="3">
-        <div>
-          <v-img @click="navigateToGameMenu" class="gameImage" src="//images.igdb.com/igdb/image/upload/t_1080p/co1y5n.jpg"></v-img>
-        </div>
-        <h2 class="gameTitle">Dota 2</h2>
-      </v-col>
-      <v-col cols="6" sm="3">
-        <div>
-          <v-img @click="navigateToGameMenu" class="gameImage" src="//images.igdb.com/igdb/image/upload/t_1080p/co1wzo.jpg"></v-img>
-        </div>
-        <h2 class="gameTitle">Apex</h2>
-      </v-col>
-      <v-col cols="6" sm="3">
-        <div>
-          <v-img @click="navigateToGameMenu" class="gameImage" src="//images.igdb.com/igdb/image/upload/t_1080p/co20o8.jpg"></v-img>
-        </div>
-        <h2 class="gameTitle">Warzone</h2>
+        <h2 class="gameTitle">{{game.name}}</h2>
       </v-col>
     </v-row>
   </section>
@@ -33,14 +15,38 @@
 </template>
 
 <script>
+import HelpiApiService from '../services/helpi-api-service';
 export default {
   name: "games",
-  methods: {
-    navigateToGameMenu(){
-      this.$router.push({name: 'game-menu'});
+
+  data() {
+    return {
+      games: [],
+      errors: [],
+      helpiApi: HelpiApiService
     }
+  },
+  mounted() {
+    this.getGames();
+  },
+
+  methods: {
+    navigateToGameMenu(id){
+      this.$router.push({name: 'game-menu', params: { id: id}});
+    },
+
+    getGames(){
+      this.helpiApi.getGamesApi()
+      .then(response => {
+        this.games = response.data;
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+    },
   }
-}
+
+};
 
 </script>
 
