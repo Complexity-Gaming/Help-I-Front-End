@@ -3,10 +3,11 @@
     <v-app-bar app dark color=#666173>
       <v-toolbar-title>HelpI</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items>
+      <v-toolbar-items :id = 1>
         <v-btn text to="/">home</v-btn>
         <v-btn text to="/games">games</v-btn>
         <v-btn text to="/about">about</v-btn>
+        <v-btn text to="/profile-player/:id">perfil</v-btn>
       </v-toolbar-items>
     </v-app-bar>
 

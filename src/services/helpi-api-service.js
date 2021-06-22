@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 class HelpiApiService {
-
     http = null
 
     constructor() {
@@ -19,6 +18,10 @@ class HelpiApiService {
 
     getGamesBy(gameId){
         return this.http.get(`/games/${gameId}`)
+    }
+
+    getPerfilPlayerBy(playerId){
+        return this.http.get(`/players/${playerId}`)
     }
 
 }

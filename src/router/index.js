@@ -24,6 +24,11 @@ const routes = [
     path: '/games/:id',
     name: 'game-menu',
     component: () => import('../components/game-menu')
+  },
+  {
+    path: '/profile-player/:id',
+    name: 'profile-player-player',
+    component: () => import('../components/profile-player')
   }
 ]
 
