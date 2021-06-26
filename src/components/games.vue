@@ -1,17 +1,26 @@
 <template>
+  <div class="container">
+    <v-row class="row">
 
-  <section>
-    <h1 class="gameChooseTittle">Elige tu juego</h1>
-    <v-row align="center" justify="center">
-      <v-col cols="6" sm="3" v-for="game in games" :key="game.id">
-        <div>
-          <v-img @click="navigateToGameMenu(game.id)" class="gameImage" v-bind:src="game.coverUrl"></v-img>
-        </div>
-        <h2 class="gameTitle">{{game.name}}</h2>
+      <v-col class="col">
+        <h1>HelpI</h1>
+        <p>Escoge tu juego</p>
+        <button @click="navigateToRegister" type="button">Register now</button>
       </v-col>
-    </v-row>
-  </section>
 
+      <v-col class="col">
+        <v-row>
+          <v-col class="flex-column" v-for="game in games" :key="game.id" cols="6">
+            <v-card @click="navigateToGameMenu(game.id)" class="card">
+              <v-img :src="game.coverUrl">
+              </v-img>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-col>
+
+    </v-row>
+  </div>
 </template>
 
 <script>
@@ -32,7 +41,11 @@ export default {
 
   methods: {
     navigateToGameMenu(id){
-      this.$router.push({name: 'game-menu', params: { id: id}});
+      this.$router.push({name: 'game', params: { id: id}});
+    },
+
+    navigateToRegister(){
+      this.$router.push({name: 'register'});
     },
 
     getGames(){
@@ -52,25 +65,79 @@ export default {
 
 <style scoped>
 
-.gameImage {
-  width: fit-content;
-  border-radius: inherit;
-  margin-bottom: 5%;
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto';
 }
 
-.gameTitle {
-  text-align: center;
-  font-size: 100%;
-  color: #666173;
-  margin-bottom: 10%;
+.container{
+  width: 100%;
+  height: 100vh;
+  padding-left: 8%;
+  padding-right: 8%;
+  box-sizing: border-box;
 }
 
-.gameChooseTittle {
-  font-size: 300%;
-  font-weight: bolder;
+.row{
+  align-items: center;
+}
+
+.col{
+
+}
+
+h1{
   color: #139028;
-  text-align: center;
-  margin: 5%;
+  font-size: 32px;
+}
+
+@media screen and (min-width: 700px) {
+  h1{
+    font-size: 70px;
+  }
+}
+
+p{
+  color: #139028;
+  font-size: 15px;
+  line-height: 1;
+}
+
+@media screen and (min-width: 700px) {
+  p{
+    font-size: 40px;
+  }
+}
+
+button{
+  display:inline-block;
+  padding:0.3em 1.2em;
+  margin:0 0.3em 0.3em 0;
+  border-radius:2em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:#FFFFFF;
+  background-color:#666173;
+  text-align:center;
+  transition: all 0.2s;
+}
+
+.card{
+  max-width: 300px;
+  height: auto;
+  display: flex;
+  border-radius: 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin: 30px 25px;
+  transition: transform 0.5s;
+}
+
+.card:hover{
+  transform: translateY(-10px);
 }
 
 </style>

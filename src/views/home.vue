@@ -1,22 +1,17 @@
 <template>
-  <h1 class="helpITittle"> Welcome to HelpI Front End</h1>
+  <div>
+    <Games></Games>
+  </div>
 </template>
 
 <script>
+import Games from "@/components/games";
   export default {
     name: 'home',
-
-
+    components: {Games},
   }
 </script>
 
 <style scoped>
-.helpITittle {
-  font-size: xxx-large;
-  font-weight: bolder;
-  color: #139028;
-  margin: auto;
-  text-align: center;
-  vertical-align: center;
-}
+
 </style>
