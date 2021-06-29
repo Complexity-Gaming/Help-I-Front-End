@@ -5,9 +5,9 @@
       <img alt="Banner" :src="game.coverUrl">
       <div class="container">
         <h1>{{game.name}}</h1>
-        <button class="option-button"> Encuentra a tu coach </button>
-        <button class="option-button"> Clases basicas </button>
-        <button class="option-button"> Clases detalladas </button>
+        <button class="option-button" @click="navigateToExperts()"> Encuentra a tu coach </button>
+        <button class="option-button" @click="navigateToMaterials()"> Clases basicas </button>
+        <button class="option-button" @click="navigateToMaterials()"> Clases detalladas </button>
       </div>
     </section>
 
@@ -19,31 +19,29 @@
     <section class="experts">
       <h3>EXPERTOS DESTACADOS</h3>
       <div class="container">
-        <article>
-          <img src="https://elcomercio.pe/resizer/1a5WcicS8XZoP2gbziPuxMUnfCU=/1200x800/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/HDMIU63K2VAZVDYX4DDCSIKEQE.jpg">
-          <h4 style="text-align: center">Ana</h4>
-        </article>
-        <article>
-          <img src="https://img.redbull.com/images/c_crop,x_0,y_0,h_1200,w_1200/c_fill,w_830,h_830/q_auto,f_auto/redbullcom/2019/08/02/6fdd0e26-cac4-4691-9463-2dcfafb7f861/topias-topson-taavitsainen-dota-profile">
-          <h4 style="text-align: center">Topson</h4>
-        </article>
-        <article>
-          <img src="https://gamerzclass.com/wp-content/uploads/2020/06/NewAegis_PP_N0TAIL.jpg">
-          <h4 style="text-align: center">NOTail</h4>
+        <article v-for="expert in experts.slice(0,3)" :key="expert.id">
+          <img :src="expert.personalProfile.profilePictureUrl">
+          <h4 style="text-align: center">{{expert.personalProfile.firstName}}</h4>
         </article>
       </div>
     </section>
 
-    <h3>MATERIALES DESTACADOS</h3>
-    <div class="row justify-center align-content-center mt-4" style="background-color: #666173">
-      <div class="col-md-4">
-        <v-img class="item-image" src="https://images.hive.blog/768x0/https://cdn.steemitimages.com/DQma7NA1roa6dLL3srF6htc9mCTcPT2kPdLdj6DQbQuumEK/logo_kardel_sharpeye__sniper_dota_2_by_ritchyzz-dbb5enm.png"></v-img>
+    <section class="training" >
+      <h3>MATERIALES DESTACADOS</h3>
+      <div class="container" style="background-color: #666173; margin: 30px" v-for="trainingMaterial in trainingMaterials.slice(0,2)" :key="trainingMaterial.id">
+        <article>
+          <img class="item-image" :src="trainingMaterial.videoUri">
+        </article>
+        <article style="text-align: right; color: #FFFFFF">
+          <h3>{{trainingMaterial.trainingMaterialId}}</h3>
+          <h5> Fecha de publicacion: {{ trainingMaterial.publishedDate }}
+          Precio: {{trainingMaterial.price}} {{trainingMaterial.currency}}</h5>
+          <p>{{game.summary}}</p>
+          <button class="option-button"> Comprar ahora </button>
+          <button class="option-button"> Detalles </button>
+        </article>
       </div>
-      <div class="col-md-4">
-        <h3 style="text-align: right; color: #FFFFFF">Material destacado</h3>
-        <p style="text-align: right; color: #FFFFFF">{{ game.summary }}</p>
-      </div>
-    </div>
+    </section>
 
   </v-container>
 </template>
@@ -56,12 +54,18 @@ export default {
 
   data() {
     return {
+
       game: {
         id: 0,
         name: '',
         summary: '',
         coverUrl: ''
-      }
+      },
+
+      experts: [],
+
+      trainingMaterials: []
+
     }
   },
 
@@ -74,11 +78,41 @@ export default {
       .catch(e => {
         console.log(e);
       })
+    },
+    retrieveExperts(id){
+      HelpiApiService.getExpertsByGameId(id)
+      .then((response) =>{
+        this.experts = response.data;
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+    },
+
+    retrieveTrainingMaterial(id){
+      HelpiApiService.getTrainingMaterialGameId(id)
+          .then((response) =>{
+            this.trainingMaterials = response.data;
+          })
+          .catch((e) => {
+            console.log(e);
+          })
+    },
+
+    navigateToExperts(){
+      this.$router.push({name: 'experts'});
+    },
+
+    navigateToMaterials(){
+      this.$router.push({name: 'materials'});
     }
+
   },
 
   created() {
     this.retrieveGame(this.$route.params.id);
+    this.retrieveExperts(this.$route.params.id);
+    this.retrieveTrainingMaterial(this.$route.params.id);
   }
 
 };
@@ -155,6 +189,22 @@ section{
 .item-image{
   width: 100%;
   height: 100%;
+  position: relative;
+}
+
+.training .container{
+  display: flex;
+  align-items: center;
+  border-radius: .8rem;
+  justify-content: center;
+  
+}
+
+@media screen and (max-width: 868px) {
+  .training .container{
+    flex-direction: column;
+  }
+
 }
 
 </style>

@@ -9,6 +9,7 @@
           <v-text-field label="Email" v-model="user.email" required></v-text-field>
           <v-text-field label="Password" v-model="user.password" type="password" required></v-text-field>
           <v-text-field label="Birthdate" v-model="user.birthdate" type="date" required></v-text-field>
+          <v-text-field label="Photo" v-model="user.profilePictureUrl"></v-text-field>
         </v-card-text>
         <v-card-actions>
           <v-btn app dark color="#139028" type="submit">Register</v-btn>
@@ -25,7 +26,7 @@ export default {
   name: "register",
   data() {
     return {
-      user: new User('', '', '', '', '', ''),
+      user: new User('', '', '', '', '', '', ''),
       submitted: false,
       successful: false,
       message: '',
