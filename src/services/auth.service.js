@@ -40,7 +40,8 @@ class AuthService {
             lastName: user.lastName,
             email: user.email,
             password: user.password,
-            birthdate: user.birthdate
+            birthdate: user.birthdate,
+            profilePictureUrl: user.profilePictureUrl
         });
 
     }

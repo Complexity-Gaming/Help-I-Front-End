@@ -1,15 +1,25 @@
 <template>
-  <v-card>
-    <v-card-title>{{currentUserFullName}}</v-card-title>
-    <v-card-text>
-      <p>
-        <strong>Token:</strong>
-        {{ currentUser.token}}
-      </p>
-      <p><strong>Id:</strong>{{ currentUser.id }}</p>
-      <p><strong>Email:</strong>{{ currentUser.email }}</p>
-    </v-card-text>
-  </v-card>
+  <section class="body">
+    <div class="fullName">
+      <span> {{ currentUserFullName }} </span>
+      <h3> Lista de Juegos </h3>
+      <hr>
+      <div class="text-line">
+        <h3> Correo electronico</h3>
+        <span> {{ currentUser.email }} </span>
+      </div>
+
+      <button class="button">Cambiar contraseña</button> <br>
+      <button class="button">Vincular Discord</button> <br>
+      <hr>
+      <button class="button">Vincular método de pago</button> <br>
+
+    </div>
+
+    <avatar class = "avatar">
+      <img :src="currentUser.profilePictureUrl" alt="Avatar">
+    </avatar>
+  </section>
 </template>
 
 <script>
@@ -33,5 +43,36 @@ export default {
 </script>
 
 <style scoped>
+.body{
+  display: flex;
+  justify-content: space-between;
+  margin: 25px;
+}
 
+.avatar{
+  position: relative;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 80%;
+  display: flex;
+  justify-content: center;
+}
+
+.fullName{
+  line-height: 55px;
+}
+
+.text-line{
+  display: flex;
+  white-space: pre-wrap;
+}
+
+.button {
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
 </style>
