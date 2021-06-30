@@ -35,6 +35,26 @@ class HelpiApiService {
     getProfileByPlayer(playerId){
         return this.http.get(`/players/${playerId}`)
     }
+
+    postExpertApplication(application, playerId){
+        return this.http.post(`/players/${playerId}/applications`, {
+            gameId: application.gameId,
+            description: application.description,
+            videoApplication: application.videoApplication
+        })
+    }
+
+    getApplicationsByPlayerId(playerId){
+        return this.http.get(`/players/${playerId}/applications`)
+    }
+
+    getTrainingMaterialsByPlayerId(playerId){
+        return this.http.get(`/players/${playerId}/trainings`)
+    }
+
+    postPlayerTrainingMaterial(playerId, trainingMaterialId){
+        return this.http.post(`/players/${playerId}/trainings/${trainingMaterialId}`)
+    }
 }
 
 export default new HelpiApiService();
