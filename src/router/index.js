@@ -12,7 +12,10 @@ const routes = [
   { path: '/register',  name: 'register', component: () => import('../views/register'), meta: {title: 'Register'}},
   { path: '/profile',   name: 'profile',  component: () => import('../views/profile'), meta: {title: 'Profile'}},
   { path: '/games/:id/experts',   name: 'experts',  component: () => import('../views/experts'), meta: {title: 'Experts'}},
-  { path: '/games/:id/materials',   name: 'materials',  component: () => import('../views/materials'), meta: {title: 'Materials'}}
+  { path: '/games/:id/materials',   name: 'materials',  component: () => import('../views/materials'), meta: {title: 'Materials'}},
+  { path: '/profile/application',   name: 'application',  component: () => import('../views/application'), meta: {title: 'Application'}},
+  { path: '/profile/:id/applications',   name: 'applications',  component: () => import('../views/applications'), meta: {title: 'Applications'}},
+  { path: '/profile/:id/material',   name: 'material',  component: () => import('../views/material'), meta: {title: 'Material'}}
 ]
 
 const router = new VueRouter({

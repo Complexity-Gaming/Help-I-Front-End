@@ -37,7 +37,7 @@
           <h5> Fecha de publicacion: {{ trainingMaterial.publishedDate }}
           Precio: {{trainingMaterial.price}} {{trainingMaterial.currency}}</h5>
           <p>{{game.summary}}</p>
-          <button class="option-button"> Comprar ahora </button>
+          <button @click="purchaseTrainingMaterial(trainingMaterial.id)" class="option-button"> Comprar ahora </button>
           <button class="option-button"> Detalles </button>
         </article>
       </div>
@@ -66,6 +66,13 @@ export default {
 
       trainingMaterials: []
 
+    }
+  },
+
+  computed: {
+    currentUser() {
+      console.log(this.$store.state.auth.user);
+      return this.$store.state.auth.user;
     }
   },
 
@@ -105,6 +112,15 @@ export default {
 
     navigateToMaterials(){
       this.$router.push({name: 'materials'});
+    },
+
+    navigateToProfileMaterials(){
+      this.$router.push({name: 'material', params: { id: this.currentUser.id}});
+    },
+
+    purchaseTrainingMaterial(trainingId){
+      HelpiApiService.postPlayerTrainingMaterial(this.currentUser.id, trainingId)
+      this.navigateToProfileMaterials()
     }
 
   },
