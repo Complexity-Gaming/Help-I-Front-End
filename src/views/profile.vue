@@ -1,7 +1,7 @@
 <template>
   <section class="body">
     <div class="fullName">
-      <span> {{ currentUserFullName }} </span>
+      <h1> {{ currentUserFullName }} </h1>
       <h3> Lista de Juegos </h3>
       <hr>
       <div class="text-line">
@@ -12,8 +12,10 @@
       <button class="button">Cambiar contraseña</button> <br>
       <button class="button">Vincular Discord</button> <br>
       <hr>
-      <button class="button">Vincular método de pago</button> <br>
-
+      <button class="button" style="color: #139028">Vincular método de pago</button> <br>
+      <button @click="navigateToApplication" class="button" style="color: #139028">Aplicar para Experto</button> <br>
+      <button @click="navigateToApplications" class="button" style="color: #139028">Ver mis aplicaciones</button> <br>
+      <button @click="navigateToMaterials" class="button" style="color: #139028">Ver mis materiales</button> <br>
     </div>
 
     <avatar class = "avatar">
@@ -34,6 +36,22 @@ export default {
       return `${this.currentUser.firstName} ${this.currentUser.lastName}`;
     }
   },
+
+  methods: {
+    navigateToApplication(){
+      this.$router.push({name: 'application'});
+    },
+
+    navigateToApplications(){
+      this.$router.push({name: 'applications', params: { id: this.currentUser.id}});
+    },
+
+    navigateToMaterials(){
+      this.$router.push({name: 'material', params: { id: this.currentUser.id}});
+    }
+
+  },
+
   mounted() {
     if (!this.currentUser) {
       this.$router.push('/login');
