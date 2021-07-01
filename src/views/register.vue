@@ -44,6 +44,11 @@ export default {
     }
   },
   methods: {
+
+    navigateToSignIn(){
+      this.$router.push({name: 'login'});
+    },
+
     handleRegister() {
       console.log(this.user);
       this.message = '';
@@ -60,6 +65,7 @@ export default {
               this.successful = false;
             }
         )
+        this.navigateToSignIn()
       }
     }
   }

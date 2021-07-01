@@ -15,7 +15,8 @@ const routes = [
   { path: '/games/:id/materials',   name: 'materials',  component: () => import('../views/materials'), meta: {title: 'Materials'}},
   { path: '/profile/application',   name: 'application',  component: () => import('../views/application'), meta: {title: 'Application'}},
   { path: '/profile/:id/applications',   name: 'applications',  component: () => import('../views/applications'), meta: {title: 'Applications'}},
-  { path: '/profile/:id/material',   name: 'material',  component: () => import('../views/material'), meta: {title: 'Material'}}
+  { path: '/profile/:id/material',   name: 'material',  component: () => import('../views/material'), meta: {title: 'Material'}},
+  { path: '/games/:id/experts/:expertId',   name: 'expert',  component: () => import('../views/expert'), meta: {title: 'Expert'}}
 ]
 
 const router = new VueRouter({
