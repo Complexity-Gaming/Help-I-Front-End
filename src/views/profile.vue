@@ -2,20 +2,18 @@
   <section class="body">
     <div class="fullName">
       <h1> {{ currentUserFullName }} </h1>
-      <h3> Lista de Juegos </h3>
+
       <hr>
       <div class="text-line">
-        <h3> Correo electronico</h3>
+        <h3> Email</h3>
         <span> {{ currentUser.email }} </span>
       </div>
 
-      <button class="button">Cambiar contraseña</button> <br>
-      <button class="button">Vincular Discord</button> <br>
+      <button class="button">Change password</button> <br>
       <hr>
-      <button class="button" style="color: #139028">Vincular método de pago</button> <br>
-      <button @click="navigateToApplication" class="button" style="color: #139028">Aplicar para Experto</button> <br>
-      <button @click="navigateToApplications" class="button" style="color: #139028">Ver mis aplicaciones</button> <br>
-      <button @click="navigateToMaterials" class="button" style="color: #139028">Ver mis materiales</button> <br>
+      <button @click="navigateToApplication" class="button" style="color: #139028">Apply to expert</button> <br>
+      <button @click="navigateToApplications" class="button" style="color: #139028">My applications</button> <br>
+      <button @click="navigateToMaterials" class="button" style="color: #139028">My training materials</button> <br>
     </div>
 
     <avatar class = "avatar">

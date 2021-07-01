@@ -1,7 +1,7 @@
 <template>
  <v-container>
    <section style="text-align: center">
-     <h2>Presentamos la linea de materiales de entrenamiento de nuestros expertos para {{game.name}} </h2>
+     <h2>Presenting our training materials for {{game.name}} </h2>
    </section>
 
    <section class="training" >
@@ -14,7 +14,7 @@
          <h5> Fecha de publicacion: {{ trainingMaterial.publishedDate }}
            Precio: {{trainingMaterial.price}} {{trainingMaterial.currency}}</h5>
          <p>{{trainingMaterial.description}}</p>
-         <button @click="purchaseTrainingMaterial(trainingMaterial.id)" class="option-button"> Comprar ahora </button>
+         <button @click="purchaseTrainingMaterial(trainingMaterial.id)" class="option-button"> Buy now </button>
        </article>
      </div>
    </section>

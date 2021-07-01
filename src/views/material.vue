@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <section style="text-align: center">
-      <h2>Mis training Materials </h2>
+      <h2>My training materials </h2>
     </section>
 
     <section class="training" >

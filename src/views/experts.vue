@@ -2,14 +2,14 @@
   <v-container>
 
     <section style="text-align: center">
-      <h2>Presentamos a nuestra linea de expertos para {{game.name}}</h2>
+      <h2>Presenting our experts for {{game.name}}</h2>
     </section>
 
     <section class="experts">
       <div class="container">
         <article v-for="expert in experts" :key="expert.id">
           <img @click="navigateToExpert(expert.id)" :src="expert.personalProfile.profilePictureUrl">
-          <h4 style="text-align: center">{{expert.personalProfile.firstName}}</h4>
+          <h4 style="text-align: center">{{expert.expertProfile.gameUserName}}</h4>
         </article>
       </div>
     </section>

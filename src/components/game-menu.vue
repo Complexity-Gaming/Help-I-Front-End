@@ -5,19 +5,19 @@
       <img alt="Banner" :src="game.backgroundImageUrl">
       <div class="container">
         <h1>{{game.name}}</h1>
-        <button class="option-button" @click="navigateToExperts()"> Encuentra a tu coach </button>
-        <button class="option-button" @click="navigateToMaterials()"> Clases basicas </button>
-        <button class="option-button" @click="navigateToMaterials()"> Clases detalladas </button>
+        <button class="option-button" @click="navigateToExperts()"> Find your expert </button>
+        <button class="option-button" @click="navigateToMaterials()"> Basic training </button>
+        <button class="option-button" @click="navigateToMaterials()"> Advanced training </button>
       </div>
     </section>
 
     <section style="text-align: center">
-      <h2>Bienvenido al menu de {{game.name}}</h2>
+      <h2>Welcome to {{game.name}} menu</h2>
       <p>{{game.summary}}</p>
     </section>
 
     <section class="experts">
-      <h3>EXPERTOS DESTACADOS</h3>
+      <h3>FAVORITE EXPERTS</h3>
       <div class="container">
         <article v-for="expert in experts.slice(0,3)" :key="expert.id">
           <img @click="navigateToExpert(expert.id)" :src="expert.personalProfile.profilePictureUrl">
@@ -27,7 +27,7 @@
     </section>
 
     <section class="training" >
-      <h3>MATERIALES DESTACADOS</h3>
+      <h3>FAVORITE TRAINING MATERIALS</h3>
       <div class="container" style="background-color: #666173; margin: 30px" v-for="trainingMaterial in trainingMaterials.slice(0,2)" :key="trainingMaterial.id">
         <article>
           <img class="item-image" :src="trainingMaterial.videoUri">
@@ -37,7 +37,7 @@
           <h5> Fecha de publicacion: {{ trainingMaterial.publishedDate }}
           Precio: {{trainingMaterial.price}} {{trainingMaterial.currency}}</h5>
           <p>{{trainingMaterial.description}}</p>
-          <button @click="purchaseTrainingMaterial(trainingMaterial.id)" class="option-button"> Comprar ahora </button>
+          <button @click="purchaseTrainingMaterial(trainingMaterial.id)" class="option-button"> Buy now </button>
         </article>
       </div>
     </section>

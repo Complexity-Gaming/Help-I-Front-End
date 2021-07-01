@@ -4,7 +4,7 @@
 
       <v-col class="col">
         <h1>HelpI</h1>
-        <p>Escoge tu juego</p>
+        <p>Choose your game</p>
         <button @click="navigateToRegister" type="button">Register now</button>
       </v-col>
 
