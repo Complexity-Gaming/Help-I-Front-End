@@ -8,7 +8,7 @@
     <section class="experts">
       <div class="container">
         <article v-for="expert in experts" :key="expert.id">
-          <img :src="expert.personalProfile.profilePictureUrl">
+          <img @click="navigateToExpert(expert.id)" :src="expert.personalProfile.profilePictureUrl">
           <h4 style="text-align: center">{{expert.personalProfile.firstName}}</h4>
         </article>
       </div>
@@ -57,13 +57,17 @@ export default {
           .catch((e) => {
             console.log(e);
           })
+    },
+
+    navigateToExpert(expertId){
+      this.$router.push({name: 'expert', params: { id: this.$route.params.id, expertId: expertId}});
     }
+
   },
 
   created() {
     this.retrieveGame(this.$route.params.id);
     this.retrieveExperts(this.$route.params.id);
-    this.retrieveTrainingMaterial(this.$route.params.id);
   }
 
 }
@@ -114,6 +118,10 @@ section{
   width: 250px;
   height: 250px;
   border-radius: 300px;
+}
+
+.experts img:hover{
+  transform: translateY(-10px);
 }
 
 .training .container{

@@ -55,6 +55,11 @@ class HelpiApiService {
     postPlayerTrainingMaterial(playerId, trainingMaterialId){
         return this.http.post(`/players/${playerId}/trainings/${trainingMaterialId}`)
     }
+
+    getExpertsByExpertId(expertId){
+        return this.http.get(`/experts/${expertId}`)
+    }
+
 }
 
 export default new HelpiApiService();
