@@ -2,7 +2,7 @@
   <v-container>
 
     <section class="banner">
-      <img alt="Banner" :src="game.coverUrl">
+      <img alt="Banner" :src="game.backgroundImageUrl">
       <div class="container">
         <h1>{{game.name}}</h1>
         <button class="option-button" @click="navigateToExperts()"> Encuentra a tu coach </button>
@@ -20,8 +20,8 @@
       <h3>EXPERTOS DESTACADOS</h3>
       <div class="container">
         <article v-for="expert in experts.slice(0,3)" :key="expert.id">
-          <img :src="expert.personalProfile.profilePictureUrl">
-          <h4 style="text-align: center">{{expert.personalProfile.firstName}}</h4>
+          <img @click="navigateToExpert(expert.id)" :src="expert.personalProfile.profilePictureUrl">
+          <h4 style="text-align: center">{{expert.expertProfile.gameUserName}}</h4>
         </article>
       </div>
     </section>
@@ -36,9 +36,8 @@
           <h3>{{trainingMaterial.trainingMaterialId}}</h3>
           <h5> Fecha de publicacion: {{ trainingMaterial.publishedDate }}
           Precio: {{trainingMaterial.price}} {{trainingMaterial.currency}}</h5>
-          <p>{{game.summary}}</p>
+          <p>{{trainingMaterial.description}}</p>
           <button @click="purchaseTrainingMaterial(trainingMaterial.id)" class="option-button"> Comprar ahora </button>
-          <button class="option-button"> Detalles </button>
         </article>
       </div>
     </section>
@@ -59,7 +58,8 @@ export default {
         id: 0,
         name: '',
         summary: '',
-        coverUrl: ''
+        coverUrl: '',
+        backgroundImageUrl: ''
       },
 
       experts: [],
@@ -118,6 +118,10 @@ export default {
       this.$router.push({name: 'material', params: { id: this.currentUser.id}});
     },
 
+    navigateToExpert(expertId){
+      this.$router.push({name: 'expert', params: { id: this.$route.params.id, expertId: expertId}});
+    },
+
     purchaseTrainingMaterial(trainingId){
       HelpiApiService.postPlayerTrainingMaterial(this.currentUser.id, trainingId)
       this.navigateToProfileMaterials()
@@ -156,7 +160,7 @@ section{
 .banner img{
   width: 100%;
   height: 500px;
-  filter: brightness(0.4);
+  filter: blur(4px) brightness(0.4);
 }
 
 .banner .container{
@@ -201,6 +205,11 @@ section{
   height: 250px;
   border-radius: 300px;
 }
+
+.experts img:hover{
+  transform: translateY(-10px);
+}
+
 
 .item-image{
   width: 100%;
